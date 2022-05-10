@@ -1,0 +1,23 @@
+{
+  "name": "ox_socket",
+  "version": "1.0.0",
+  "description": "OX_socket",
+  "main": "socket.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YoonHyunWoo/OX_socket.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YoonHyunWoo/OX_socket/issues"
+  },
+  "homepage": "https://github.com/YoonHyunWoo/OX_socket#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "socketio": "^1.0.0"
+  }
+}
