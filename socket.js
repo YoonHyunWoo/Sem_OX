@@ -1,12 +1,12 @@
-const app = require('express')()
-const http = require('http').createServer(app)
-const io = require('socket.io')(http)
-const port = 3000;
+const express = require('express'); 
+const app = express();
+const server = app.listen(3000,console.log("Socket.io Hello Wolrd server started!"));
+const io = require('socket.io')(server);
 
-io.on('connection',(socket)=>{
-    console.log("connection");
-})
-
-app.listen(port, ()=>{
-    console.log("listening to" + port);
-})
+io.on('connection', (socket) => {
+    //console.log("Client connected!");
+    socket.on('message-from-client-to-server', (msg) => {
+        console.log(msg);
+    })
+    socket.emit('message-from-server-to-client', 'Helloww');
+});
