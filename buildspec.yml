@@ -1,0 +1,7 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - aws s3 cp index.html s3://semox/
+      - aws s3 cp room.html s3://semox/
