@@ -1,12 +1,11 @@
-const express = require('express'); 
-const app = express();
-const server = app.listen(3000,console.log("Socket.io Hello Wolrd server started!"));
+const app = require('express')();
+const server = app.listen(3000);
 const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
     //console.log("Client connected!");
-    socket.on('message-from-client-to-server', (msg) => {
+    socket.on('GM', (msg) => {
         console.log(msg);
     })
-    socket.emit('message-from-server-to-client', 'Helloww');
+    socket.emit('GM', 'Room is Created');
 });
