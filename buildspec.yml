@@ -3,5 +3,5 @@ version: 0.2
 phases:
   build:
     commands:
-      - aws s3 cp StaticWeb/index.html s3://semox/
-      - aws s3 cp StaticWeb/room.html s3://semox/
+      - aws s3 cp StaticWeb/index.html s3://semox/ --acl public-read
+      - aws s3 cp StaticWeb/room.html s3://semox/ --acl public-read
