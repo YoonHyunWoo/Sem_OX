@@ -1,7 +1,22 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      docker: 18
   build:
     commands:
       - aws s3 cp StaticWeb/index.html s3://semox/ --acl public-read
       - aws s3 cp StaticWeb/room.html s3://semox/ --acl public-read
+      - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com
+      - docker pull node:12
+      - docker build --tag SemOX:latest .
+      - docker tag SemOX:latest 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com/SemOX:latest
+      - docker push 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com/SemOX:latest
+
+
+  
+artifacts:
+  files:
+    - appspec.yml
+    - code/socket.js
