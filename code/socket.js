@@ -9,7 +9,7 @@ io.on('connection', (socket) => {
     socket.on('GM', (msg) => {
         console.log(msg);
     })
-    socket.emit('GM', 'Room is Created');
+    socket.emit('GM', 'Room is Created!');
 });
 
 app.get('/health', (req,res)=>{
