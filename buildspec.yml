@@ -10,7 +10,6 @@ phases:
       - aws s3 cp StaticWeb/index.html s3://semox/ --acl public-read
       - aws s3 cp StaticWeb/room.html s3://semox/ --acl public-read
       - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com
-      - sudo systemctl start docker
       - sudo docker build -t semox_repo .
       - sudo docker tag semox_repo:latest 593634833876.dkr.ecr.ap-n1ortheast-2.amazonaws.com/semox_repo:latest
       - sudo docker push 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com/semox_repo:latest
