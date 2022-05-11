@@ -13,7 +13,7 @@ phases:
       - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com
       - docker pull public.ecr.aws/docker/library/node:slim
       - docker build -t semox_repo:latest .
-      - docker tag semox_repo:latest 593634833876.dkr.ecr.ap-n1ortheast-2.amazonaws.com/semox_repo:latest
+      - docker tag semox_repo:latest 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com/semox_repo:latest
       - docker images
       - docker push 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com/semox_repo:latest
   
