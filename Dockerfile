@@ -1,8 +1,6 @@
 FROM node:18-alpine
 
-WORKDIR /usr/src/app
-
-COPY package*.json ./
+COPY pack*.json ./
 
 RUN npm install
 
@@ -10,4 +8,4 @@ COPY code/socket.js ./socket.js
 
 EXPOSE 3000:3000
 
-CMD [ "node", "socket.js"]
+CMD [ "node", "socket.js" ]
