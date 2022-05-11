@@ -9,3 +9,7 @@ io.on('connection', (socket) => {
     })
     socket.emit('GM', 'Room is Created');
 });
+
+app.get('/health', (req,res)=>{
+    res.send({"status":"ok"})
+})
