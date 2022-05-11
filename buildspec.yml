@@ -11,7 +11,7 @@ phases:
       - aws s3 cp StaticWeb/index.html s3://semox/ --acl public-read
       - aws s3 cp StaticWeb/room.html s3://semox/ --acl public-read
       - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com
-      - DATE=20$(date -d "+9 hour" +%y-%m-%d-%T)
+      - DATE=20$(date -d "+9 hour" +%y-%m-%d-%H-%M-%S)
       - docker pull public.ecr.aws/docker/library/node:slim
       - docker build -t semox_repo:$DATE .
       - docker tag semox_repo:$DATE 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com/semox_repo:$DATE
