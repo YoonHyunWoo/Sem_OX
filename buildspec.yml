@@ -15,10 +15,14 @@ phases:
       - docker pull public.ecr.aws/docker/library/node:slim
       - docker build -t semox_repo:$DATE .
       - docker tag semox_repo:$DATE 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com/semox_repo:$DATE
+      - docker tag semox_repo:$DATE 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com/semox_repo:latest
       - docker images
       - docker push 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com/semox_repo:$DATE
+      - docker push 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com/semox_repo:latest
   
 artifacts:
   files:
     - appspec.yml
     - code/socket.js
+    - Dockerfile
+    - pac*.json
