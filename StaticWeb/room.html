@@ -3,6 +3,48 @@
    <head>
       <meta charset="UTF-8">
       <title>SemOX-room</title>
+      <style>
+        html,body{
+  height:100%;
+}
+
+.copylink > button{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.copylink > button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+.copylink > button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+.copylink > button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.copylink > button:hover:before,.copylink > button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+      </style>
    </head>
    <body>
       <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
@@ -10,7 +52,7 @@
          <p id="CCU"></p>
       </div>
       <p id="message"></p>
-      <div class="CopyLink">
+      <div class="copylink">
          <button class="copy">링크를 복사해서 초대하세요!</button>
       </div>
    </body>
