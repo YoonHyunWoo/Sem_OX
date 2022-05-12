@@ -7,7 +7,11 @@ app.use(cors())
 
 io.sockets.addListener('connection', (socket)=>{
     socket.join(socket.handshake.query.room)
-    socket.emit('title', socket.handshake.query.room + "에 접속해 있습니다!")
+    room = socket.handshake.query.room
+    namespace = "/"
+    var clients = io.nsps[namespace].adapter.rooms[room];
+    Object.keys(clients).length;
+    socket.emit('title', Object.keys(clients).length)
 })
 
 
