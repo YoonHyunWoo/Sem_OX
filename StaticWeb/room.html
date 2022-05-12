@@ -6,9 +6,16 @@
   </head>
   <body>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <p id="CCU"></p><br>
+    <div class="CCU">
+      <p id="CCU"></p>
+    </div>
+    
     
     <p id="message"></p>
+
+    <div class="CopyLink">
+      <button class="copy">링크를 복사해서 초대하세요!</button>
+    </div>
   </body>
 
   <script>
@@ -38,7 +45,15 @@
         document.getElementById('message').innerHTML = msg;
     });
     
-    
+    document.querySelector(".copy").addEventListener("click", function(){
+    var tempElem = document.createElement('textarea');
+    tempElem.value = "https://semox.s3.ap-northeast-2.amazonaws.com/room.html?room=" + queryString.room
+    document.body.appendChild(tempElem);
+
+    tempElem.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempElem);
+});
 
     
 
