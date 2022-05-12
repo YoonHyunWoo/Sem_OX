@@ -8,7 +8,8 @@ app.use(cors())
 io.sockets.addListener('connection', (socket)=>{
     room = socket.handshake.query.room
     socket.join(room)
-    socket.emit('title', io.nsps['/'].adapter.rooms[room].sockets)
+    CCU = JSON.stringify(io.nsps['/'].adapter.rooms[room].sockets)
+    socket.emit('CCU', CCU)
 })
 
 
