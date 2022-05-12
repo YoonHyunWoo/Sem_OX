@@ -1,63 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>SemOX-room</title>
-  </head>
-  <body>
-    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <div class="CCU">
-      <p id="CCU"></p>
-    </div>
-    
-    
-    <p id="message"></p>
+   <head>
+      <meta charset="UTF-8">
+      <title>SemOX-room</title>
+   </head>
+   <body>
+      <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+      <div class="CCU">
+         <p id="CCU"></p>
+      </div>
+      <p id="message"></p>
+      <div class="CopyLink">
+         <button class="copy">링크를 복사해서 초대하세요!</button>
+      </div>
+   </body>
+   <script>
+      function getQueryStringObject() {
+      var a = window.location.search.substr(1).split('&');
+      if (a == "") return {};
+      var b = {};
+      for (var i = 0; i < a.length; ++i) {
+          var p = a[i].split('=', 2);
+          if (p.length == 1)
+              b[p[0]] = "";
+          else
+              b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+      }
+      return b;
+      }
+      var queryString = getQueryStringObject()
+      var socketurl = "http://13.125.73.128:3000?room=" + queryString.room
+      var socket = io(socketurl);
+      socket.on('CCU', (msg)=>{
+        document.getElementById('CCU').innerHTML = "접속자 수 : " + msg + "Reset Interval is 5second";
+      })
+      socket.on("GM", function(msg) {
+          document.getElementById('message').innerHTML = msg;
+      });
+      
+      document.querySelector(".copy").addEventListener("click", function(){
+      var tempElem = document.createElement('textarea');
+      tempElem.value = "https://semox.s3.ap-northeast-2.amazonaws.com/room.html?room=" + queryString.room
+      document.body.appendChild(tempElem);
+      
+      tempElem.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempElem);
+      });
+   </script>
 
-    <div class="CopyLink">
-      <button class="copy">링크를 복사해서 초대하세요!</button>
-    </div>
-  </body>
-
-  <script>
-    function getQueryStringObject() {
-
-    var a = window.location.search.substr(1).split('&');
-    if (a == "") return {};
-    var b = {};
-    for (var i = 0; i < a.length; ++i) {
-        var p = a[i].split('=', 2);
-        if (p.length == 1)
-            b[p[0]] = "";
-        else
-            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-    }
-    return b;
-    }
-    
-    var queryString = getQueryStringObject()
-    var socketurl = "http://13.125.73.128:3000?room=" + queryString.room
-    
-    var socket = io(socketurl);
-    socket.on('CCU', (msg)=>{
-      document.getElementById('CCU').innerHTML = "접속자 수 : " + msg;
-    })
-    socket.on("GM", function(msg) {
-        document.getElementById('message').innerHTML = msg;
-    });
-    
-    document.querySelector(".copy").addEventListener("click", function(){
-    var tempElem = document.createElement('textarea');
-    tempElem.value = "https://semox.s3.ap-northeast-2.amazonaws.com/room.html?room=" + queryString.room
-    document.body.appendChild(tempElem);
-
-    tempElem.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempElem);
-});
-
-    
-
-    
-  </script>
-  
 </html>
