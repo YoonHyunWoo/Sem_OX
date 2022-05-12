@@ -5,7 +5,7 @@ files:
     destination: /home/ec2-user
 
 hooks:
-  Applicationstop:
+  BeforeInstall:
     - location: scripts/appstop.sh    
       runas: root
   ApplicationStart:
