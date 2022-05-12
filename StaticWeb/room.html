@@ -29,7 +29,7 @@
     var socketurl = "http://13.125.73.128:3000?room=" + queryString.room
     
     var socket = io(socketurl);
-    socket.on('CCU', (msg)=>{
+    socket.on('title', (msg)=>{
       document.getElementById('message').innerHTML = "접속자 수 : " + msg;
     })
     socket.on("GM", function(msg) {
