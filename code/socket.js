@@ -8,9 +8,9 @@ app.use(cors())
 io.sockets.addListener('connection', (socket)=>{
     room = socket.handshake.query.room
     socket.join(room)
-    CCU = Object.keys(JSON.stringify(io.nsps['/'].adapter.rooms[room].sockets)).length
     setInterval(() => {
-        socket.emit('CCU', CCU)    
+        CCU = Object.keys(JSON.stringify(io.nsps['/'].adapter.rooms[room].sockets)).length
+        socket.emit('CCU', CCU)
     }, 1000);
 })
 
