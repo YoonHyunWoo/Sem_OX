@@ -5,11 +5,9 @@ const cors = require('cors')
 app.use(cors())
 
 io.on('connection', (socket) => {
-    //console.log("Client connected!");
-    socket.on('GM', (msg) => {
-        console.log(msg);
+    io.sockets.addListener('connection', (socket)=>{
+        socket.emit('GM', 'Room is create to' + socket.handshake.query.myChannel);
     })
-    socket.emit('GM', 'Room is Created!');
 });
 
 app.get('/health', (req,res)=>{
