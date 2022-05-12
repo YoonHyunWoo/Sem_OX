@@ -6,12 +6,9 @@ app.use(cors())
 
 
 io.sockets.addListener('connection', (socket)=>{
-    socket.join(socket.handshake.query.room)
     room = socket.handshake.query.room
-    namespace = "/"
-    var clients = io.nsps[namespace].adapter.rooms[room];
-    Object.keys(clients).length;
-    socket.emit('title', Object.keys(clients).length)
+    socket.join(room)
+    socket.emit('title', io.nsps['/'].adapter.rooms[room].sockets)
 })
 
 
