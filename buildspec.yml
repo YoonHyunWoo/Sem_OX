@@ -22,6 +22,4 @@ phases:
 artifacts:
   files:
     - appspec.yml
-    - code/socket.js
-    - Dockerfile
-    - pac*.json
+    - scripts/*

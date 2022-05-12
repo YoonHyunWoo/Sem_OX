@@ -2,12 +2,12 @@ version: 0.0
 files:
   - source: /
     destination: /home/ec2-user
+
 hooks:
-  BeforeInstall:
-
-  AfterInstall:
-
   Applicationstop:
-
+    - location: scripts/appstop.sh    
+      runas: root
   ApplicationStart:
+    - location: scripts/appstart.sh
+      runas: root
   
