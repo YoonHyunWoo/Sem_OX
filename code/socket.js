@@ -15,3 +15,7 @@ io.on('connection', (socket) => {
 app.get('/health', (req,res)=>{
     res.send({"status":"ok"})
 })
+
+app.get('/admin', (req,res)=>{
+    res.send({"admin":"YoonHyunWoo"})
+})
