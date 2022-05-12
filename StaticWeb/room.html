@@ -82,7 +82,7 @@
       
       document.querySelector(".copy").addEventListener("click", function(){
       var tempElem = document.createElement('textarea');
-      tempElem.value = "https://semox.s3.ap-northeast-2.amazonaws.com/room.html?room=" + queryString.room
+      tempElem.value = "http://semox.s3.ap-northeast-2.amazonaws.com/room.html?room=" + queryString.room
       document.body.appendChild(tempElem);
       
       tempElem.select();
