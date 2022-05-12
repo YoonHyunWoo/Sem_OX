@@ -6,7 +6,7 @@ app.use(cors())
 
 io.on('connection', (socket) => {
     io.sockets.addListener('connection', (socket)=>{
-        socket.emit('GM', 'Room is create to' + socket.handshake.query.myChannel);
+        socket.emit('GM', 'Room is create to ' + socket.handshake.query.myChannel);
     })
 });
 
