@@ -5,9 +5,11 @@ const cors = require('cors')
 app.use(cors())
 
 
-    io.sockets.addListener('connection', (socket)=>{
-        socket.emit('GM', 'Room is create to ' + socket.handshake.query.room);
-    })
+io.sockets.addListener('connection', (socket)=>{
+    socket.join(socket.handshake.query.room)
+    socket.emit('CCU', "접속자 수 : " + io.sockets.clients('room'))
+    socket.emit('CCU', socket.handshake.query.room + "에 접속해 있습니다!")
+})
 
 
 app.get('/health', (req,res)=>{
