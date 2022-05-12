@@ -74,7 +74,7 @@
       var socketurl = "http://13.125.73.128:3000?room=" + queryString.room
       var socket = io(socketurl);
       socket.on('CCU', (msg)=>{
-        document.getElementById('CCU').innerHTML = "접속자 수 : " + msg + "Reset Interval is 5second";
+        document.getElementById('CCU').innerHTML = "접속자 수 : " + msg + " (Reset Interval is 5second)";
       })
       socket.on("GM", function(msg) {
           document.getElementById('message').innerHTML = msg;
