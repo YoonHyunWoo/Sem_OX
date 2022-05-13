@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev" : "ts-node code/socket.ts",
-    "build" : "tsc code/index.ts"
+    "build" : "tsc code/socket.ts"
   },
   "repository": {
     "type": "git",
