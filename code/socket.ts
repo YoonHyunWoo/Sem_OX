@@ -3,13 +3,6 @@ const server = app.listen(3000);
 const io = require('socket.io')(server);
 const cors = require('cors')
 
-let corsOptions = {
-    origin: 'https://semox.s3.ap-northeast-2.amazonaws.com/',
-    credentials: true
-}
-
-app.use(cors(corsOptions))
-
 io.sockets.addListener('connection', (socket) => {
     let room = socket.handshake.query.room
     socket.join(room)
@@ -26,3 +19,5 @@ app.get('/health', (req, res) => {
         "status": "ok"
     })
 })
+
+app.use(cors())
