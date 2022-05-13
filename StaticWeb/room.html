@@ -47,7 +47,7 @@
       </style>
    </head>
    <body>
-      <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
       <div class="CCU">
          <p id="CCU"></p>
       </div>
@@ -57,6 +57,7 @@
       </div>
    </body>
    <script>
+     
       function getQueryStringObject() {
       var a = window.location.search.substr(1).split('&');
       if (a == "") return {};
@@ -72,7 +73,11 @@
       }
       var queryString = getQueryStringObject()
       var socketurl = "http://13.125.73.128:3000?room=" + queryString.room
-      var socket = io(socketurl);
+      var socket = io(socketurl,{
+  extraHeaders: {
+    "Access-Control-Allow-Origin": true
+  }
+});
       socket.on('CCU', (msg)=>{
         document.getElementById('CCU').innerHTML = "접속자 수 : " + msg + " ( Reset Interval is 5 second )";
       })
