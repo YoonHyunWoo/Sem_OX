@@ -1,5 +1,31 @@
 # SemOX
 
+## npm
+
+---
+
+Node version은 **16.13.0**을 사용하고 있으며, `Dockerfile` 이미지 버전도 꼭 맞추어 주길 바란다.
+
+아래는 typescript config파일인 `tsconfig.json`이다
+
+`tsconfig.json`
+
+```json
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "ES5",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "sourceMap": true,
+    "downlevelIteration": true,
+    "noImplicitAny": false
+  }
+}
+```
+
 ## Container
 
 ---

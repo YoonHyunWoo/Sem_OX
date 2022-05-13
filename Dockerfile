@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/node:slim
+FROM public.ecr.aws/docker/library/node:16.13.0
 
 COPY pack*.json ./
 
