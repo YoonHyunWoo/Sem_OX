@@ -2,8 +2,13 @@ const app = require('express')()
 const server = app.listen(3000);
 const io = require('socket.io')(server);
 const cors = require('cors')
-app.use(cors())
 
+let corsOptions = {
+    origin: 'https://semox.s3.ap-northeast-2.amazonaws.com/',
+    credentials: true
+}
+
+app.use(cors(corsOptions))
 
 io.sockets.addListener('connection', (socket) => {
     let room = socket.handshake.query.room
