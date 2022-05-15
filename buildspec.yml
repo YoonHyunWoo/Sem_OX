@@ -8,8 +8,8 @@ phases:
       
   build:
     commands:
-      - aws s3 cp StaticWeb/index.html s3://semox/ --acl public-read
-      - aws s3 cp StaticWeb/room.html s3://semox/ --acl public-read
+      - aws s3 cp StaticWeb/index.html s3://ox.hwyoon.xyz/ --acl public-read
+      - aws s3 cp StaticWeb/room.html s3://ox.hwyoon.xyz/ --acl public-read
       - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 593634833876.dkr.ecr.ap-northeast-2.amazonaws.com
       - npm install
       - npm run build
