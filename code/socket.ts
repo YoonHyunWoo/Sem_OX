@@ -2,7 +2,9 @@ const app = require('express')()
 const server = app.listen(3000);
 const cors = require('cors')
 const io = require('socket.io')(server, {origin: "*"});
-app.use(cors({origin: '*', credential: 'true'}))
+app.use((req,res,next)=>{
+    next()
+}, cors({maxAge: 84600}))
 io.sockets.addListener('connection', (socket) => {
     let room = socket.handshake.query.room
     socket.join(room)
