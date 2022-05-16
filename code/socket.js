@@ -10,7 +10,7 @@ const io = require('socket.io')(server, {cors : { origin : '*',} });
 io.sockets.addListener('connection', (socket) => {
     let room = socket.handshake.query.room
     socket.join(room)
-    let CCU: number = (Object.keys(JSON.stringify(io.nsps['/'].adapter.rooms[room].sockets)).length - 1) / 28
+    let CCU = (Object.keys(JSON.stringify(io.nsps['/'].adapter.rooms[room].sockets)).length - 1) / 28
     socket.emit('CCU', CCU)
     setInterval(() => {
         CCU = (Object.keys(JSON.stringify(io.nsps['/'].adapter.rooms[room].sockets)).length - 1) / 28
