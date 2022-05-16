@@ -73,11 +73,7 @@
       }
       var queryString = getQueryStringObject()
       var socketurl = "http://13.125.73.128:3000?room=" + queryString.room
-      var socket = io(socketurl,{
-  extraHeaders: {
-    "Access-Control-Allow-Origin": true
-  }
-});
+      var socket = io(socketurl,{transports: ['websocket', 'polling', 'flashsocket']});
       socket.on('CCU', (msg)=>{
         document.getElementById('CCU').innerHTML = "접속자 수 : " + msg + " ( Reset Interval is 5 second )";
       })
