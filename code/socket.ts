@@ -2,9 +2,9 @@ const app = require('express')()
 const http = require('http')
 const server = http.createServer().listen(3000)
 const cors = require('cors')
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {cors : { origin : '*',} });
 
-io.origins('*:*')
+
 
 
 io.sockets.addListener('connection', (socket) => {
