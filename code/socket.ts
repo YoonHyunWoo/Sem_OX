@@ -1,7 +1,8 @@
 const app = require('express')()
-const server = app.listen(3000);
+const http = require('http')
+const server = http.createServer().listen(3000)
 const cors = require('cors')
-const io = require('socket.io')(server, {origin: "*"});
+const io = require('socket.io')(server);
 app.use((req,res,next)=>{
     next()
 }, cors({maxAge: 84600}))
