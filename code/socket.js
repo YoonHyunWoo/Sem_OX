@@ -5,15 +5,16 @@ const cors = require('cors')
 const io = require('socket.io')(server);
 app.use(cors())
 
-io.sockets.addListener('connection', (socket) => {
-    let room = socket.handshake.query.room
-    socket.join(room)
-    let CCU = (Object.keys(JSON.stringify(io.nsps['/'].adapter.rooms[room].sockets)).length - 1) / 28
+let CCU = 0;
+
+io.on('connection', (socket)=>{
+    CCU++;
     socket.emit('CCU', CCU)
-    setInterval(() => {
-        CCU = (Object.keys(JSON.stringify(io.nsps['/'].adapter.rooms[room].sockets)).length - 1) / 28
-        socket.emit('CCU', CCU)
-    }, 5000);
+})
+
+io.on('disconnected', (socket)=>{
+    CCU--;
+    socket.emit('CCU', CCU)
 })
 
 app.get('/health', (req, res) => {
