@@ -4,52 +4,54 @@
       <meta charset="UTF-8">
       <title>SemOX-room</title>
       <style>
-        html,body{
-  height:100%;
-}
-
-.copylink > button{
-  background:#1AAB8A;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-.copylink > button:hover{
-  background:#fff;
-  color:#1AAB8A;
-}
-.copylink > button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #1AAB8A;
-  transition:400ms ease all;
-}
-.copylink > button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-.copylink > button:hover:before,.copylink > button:hover:after{
-  width:100%;
-  transition:800ms ease all;
-}
+         html,body{
+         height:100%;
+         }
+         .copylink > button{
+         background:#1AAB8A;
+         color:#fff;
+         border:none;
+         position:relative;
+         height:60px;
+         font-size:1.6em;
+         padding:0 2em;
+         cursor:pointer;
+         transition:800ms ease all;
+         outline:none;
+         }
+         .copylink > button:hover{
+         background:#fff;
+         color:#1AAB8A;
+         }
+         .copylink > button:before,button:after{
+         content:'';
+         position:absolute;
+         top:0;
+         right:0;
+         height:2px;
+         width:0;
+         background: #1AAB8A;
+         transition:400ms ease all;
+         }
+         .copylink > button:after{
+         right:inherit;
+         top:inherit;
+         left:0;
+         bottom:0;
+         }
+         .copylink > button:hover:before,.copylink > button:hover:after{
+         width:100%;
+         transition:800ms ease all;
+         }
       </style>
    </head>
    <body>
-    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
-      <div class="CCU">
-         <p id="CCU"></p>
+      <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+      <div class="roomname">
+         <p id="roomname"></p>
+      </div>
+      <div id="users">
+         <p class="user"></p>
       </div>
       <p id="message"></p>
       <div class="copylink">
@@ -57,8 +59,8 @@
       </div>
    </body>
    <script>
-     
-      function getQueryStringObject() {
+    
+    function getQueryStringObject() {
       var a = window.location.search.substr(1).split('&');
       if (a == "") return {};
       var b = {};
@@ -73,24 +75,31 @@
       }
       var queryString = getQueryStringObject()
       // 13.125.73.128
-      var socketurl = "http://localhost:3000?room=" + queryString.room
-      var socket = io('http://localhost:3000?room=" + queryString.room',{transports: ['websocket', 'polling', 'flashsocket']});
-      socket.on('CCU', (msg)=>{
-        document.getElementById('CCU').innerHTML = "접속자 수 : " + msg + " ( Reset Interval is 5 second )";
+      var socketurl = "http://localhost:3000"
+      var socket = io(socketurl,{transports: ['websocket', 'polling', 'flashsocket']});      
+
+      socket.emit('room', queryString.room)
+      socket.emit('name', queryString.name)
+
+      socket.on('user', (data)=>{
+         let user = document.createElement('p') 
+         user.setAttribute("class", "user")
+         document.getElementById('users').appendChild(user)
+         user.innerHTML = data
       })
-      socket.on("GM", function(msg) {
-          document.getElementById('message').innerHTML = msg;
-      });
+
       
+
+
+
       document.querySelector(".copy").addEventListener("click", function(){
       var tempElem = document.createElement('textarea');
-      tempElem.value = "http://semox.s3.ap-northeast-2.amazonaws.com/room.html?room=" + queryString.room
+      tempElem.value = "file:///C:/workspace/Sem_OX/StaticWeb/room.html?room=" + queryString.room + "&name=" + queryString.name
       document.body.appendChild(tempElem);
-      
       tempElem.select();
-      document.execCommand("copy");
+      document.execCommand("copy"); 
       document.body.removeChild(tempElem);
       });
-   </script>
-
+      
+ </script>   
 </html>

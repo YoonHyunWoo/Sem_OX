@@ -7,13 +7,15 @@
     <title>SemOX</title>
 </head>
 <body>
-    <button onclick="clickbutton()">Create room</button>
+    <input type="textarea" placeholder="이름을 입력하세요!" id="name">
+    <button onclick="clickbutton()">방 만들기</button>
 </body>
 
 <script>
     function clickbutton(){
         var hash = Math.random().toString(36).substr(2,11);
-        var redirect_url = "http://ox.hwyoon.xyz.s3.ap-northeast-2.amazonaws.com/room.html?room=" + hash
+        let name = document.getElementById('name').value
+        var redirect_url = "file:///C:/workspace/Sem_OX/StaticWeb/room.html?room=" + hash + "&name="+ name
         location.href = redirect_url
     }
 </script>
