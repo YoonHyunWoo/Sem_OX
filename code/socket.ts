@@ -9,9 +9,7 @@ io.on('connection', (socket) => {
     socket.on('room', (data)=>{
         socket.join(data)
         socket.room = data
-        io.socket.clients(socket.room)
-        
-        
+        io.to(socket.room).emit('user', socket.name)
     })
     socket.on('name', (data)=>{
         socket.name = data
@@ -20,8 +18,6 @@ io.on('connection', (socket) => {
     socket.on('disconnecting',()=>{
         socket.leave(socket.room)
     })
-        
-        
 })
 
 
