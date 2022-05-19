@@ -2,65 +2,53 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
-      <title>SemOX-room</title>
+      <title>SemOX.io</title>
+      <link rel="icon" href="https://iconarchive.com/download/i103471/paomedia/small-n-flat/sign-check.ico" type="image/x-icon">
       <style>
-         html,body{
-         height:100%;
+         #chat, #message{
+            border: 2px solid black;
          }
-         .copylink > button{
-         background:#1AAB8A;
-         color:#fff;
-         border:none;
-         position:relative;
-         height:60px;
-         font-size:1.6em;
-         padding:0 2em;
-         cursor:pointer;
-         transition:800ms ease all;
-         outline:none;
-         }
-         .copylink > button:hover{
-         background:#fff;
-         color:#1AAB8A;
-         }
-         .copylink > button:before,button:after{
-         content:'';
-         position:absolute;
-         top:0;
-         right:0;
-         height:2px;
-         width:0;
-         background: #1AAB8A;
-         transition:400ms ease all;
-         }
-         .copylink > button:after{
-         right:inherit;
-         top:inherit;
-         left:0;
-         bottom:0;
-         }
-         .copylink > button:hover:before,.copylink > button:hover:after{
-         width:100%;
-         transition:800ms ease all;
-         }
+         #icon{
+            border: 2px solid black;
+            display: inline-block;
+        }
+
+        #icon > a{
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background-color: black;
+        }
       </style>
+      <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>      
    </head>
    <body>
-      <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
-      <div class="roomname">
-         <p id="roomname"></p>
-      </div>
-      <div id="users">
-         <p class="user"></p>
-      </div>
-      <p id="message"></p>
+      
+      <div id = "icon">
+         <a href="file:///C:/workspace/Sem_OX/StaticWeb/index.html">SemOX.io</a> 
+      </div> <br>
+      
+      
+      <div id = "message">
+
+      </div> <br>
+      
+
+      <div id = "chat">
+         <input type="textarea" id="inputchat" onkeyup="onKeyUp()">
+         <button onclick="send()">Send</button>
+      </div> <br>
+      
+      
       <div class="copylink">
-         <button class="copy">링크를 복사해서 초대하세요!</button>
+         
+         <center><button class="copy">링크를 복사해서 초대하세요!</button></center>
       </div>
+
    </body>
    <script>
-    
     function getQueryStringObject() {
+       // HTML 쿼리스트링 파싱하는 함수
       var a = window.location.search.substr(1).split('&');
       if (a == "") return {};
       var b = {};
@@ -73,28 +61,56 @@
       }
       return b;
       }
+   
+      // 쿼리스트링 파싱
       var queryString = getQueryStringObject()
-      // 13.125.73.128
+      
+    function onKeyUp(){
+      // Enter키 입력 시 전송하는 이벤트
+       if(window.event.keyCode == 13){
+          send()
+       }
+    }
+
+    function send(){
+      // 채팅 전송하는 이벤트
+      let msg = document.getElementById('inputchat').value
+      let chatBox = document.createElement('p')
+      chatBox.setAttribute('class', 'mymessage')
+      document.getElementById('message').appendChild(chatBox)
+      chatBox.innerHTML = msg
+      socket.emit('message', msg)
+      document.getElementById('inputchat').value = ''
+    }
+
+
+    
+      if(queryString.name == undefined || queryString.name == null){
+         // 닉네임 입력하는 이벤트
+         let name = prompt('닉네임을 입력해주세요')
+         location.href = "file:///C:/workspace/Sem_OX/StaticWeb/room.html?room=" + queryString.room + "&name=" + name
+      }
+
+      // Socket.io Connected
       var socketurl = "http://localhost:3000"
       var socket = io(socketurl,{transports: ['websocket', 'polling', 'flashsocket']});      
 
+      // Socket의 이름, 방 연결
       socket.emit('room', queryString.room)
       socket.emit('name', queryString.name)
-
-      socket.on('user', (data)=>{
-         let user = document.createElement('p') 
-         user.setAttribute("class", "user")
-         document.getElementById('users').appendChild(user)
-         user.innerHTML = data
+      
+      socket.on('message',(msg)=>{
+         // 채팅 도착 시 HTML에 로드해주는 이벤트
+         let chatBox = document.createElement('p')
+         chatBox.setAttribute('class', 'message')
+         document.getElementById('message').appendChild(chatBox)
+         chatBox.innerHTML = msg
       })
 
-      
-
-
-
+      // 방 링크 복사하기
       document.querySelector(".copy").addEventListener("click", function(){
       var tempElem = document.createElement('textarea');
-      tempElem.value = "file:///C:/workspace/Sem_OX/StaticWeb/room.html?room=" + queryString.room + "&name=" + queryString.name
+      tempElem.value = "file:///C:/workspace/Sem_OX/StaticWeb/room.html?room=" + queryString.room
       document.body.appendChild(tempElem);
       tempElem.select();
       document.execCommand("copy"); 

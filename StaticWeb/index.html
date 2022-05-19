@@ -4,18 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SemOX</title>
+    <link rel="icon" href="https://iconarchive.com/download/i103471/paomedia/small-n-flat/sign-check.ico" type="image/x-icon">
+    <title>SemOX.io</title>
+    <style>
+        #icon{
+            border: 2px solid black;
+            display: inline-block;
+        }
+
+        #icon > a{
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background-color: black;
+        }
+    </style>
 </head>
-<body>
-    <input type="textarea" placeholder="이름을 입력하세요!" id="name">
+<center>
+    <div id = "icon">
+        <a href="file:///C:/workspace/Sem_OX/StaticWeb/index.html">SemOX.io</a>
+     </div>
+
+     <br>
+     <br>
+
     <button onclick="clickbutton()">방 만들기</button>
+</center>
+<body>
+    
 </body>
 
 <script>
     function clickbutton(){
         var hash = Math.random().toString(36).substr(2,11);
-        let name = document.getElementById('name').value
-        var redirect_url = "file:///C:/workspace/Sem_OX/StaticWeb/room.html?room=" + hash + "&name="+ name
+        var redirect_url = "file:///C:/workspace/Sem_OX/StaticWeb/room.html?room=" + hash
         location.href = redirect_url
     }
 </script>
