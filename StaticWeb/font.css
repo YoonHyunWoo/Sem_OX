@@ -1,0 +1,59 @@
+@font-face {
+    font-family: "SuperHero";
+    src: url("../asset/Super\ Hero\ Docall.ttf");
+}
+html{
+    font-family: SuperHero;
+}
+#message{
+    border: 1px solid black;
+ }
+ #icon{
+    
+    zoom: 3;
+}
+#hidden{
+   display: flex;
+   flex-direction: column;
+   flex-wrap: wrap;
+   align-items: center;
+}
+#icon > a{
+    display: inline-block;
+    text-decoration: none;
+    
+}
+
+.mymessage{
+   text-align: right;
+   color: gray;
+}
+
+#message{
+   height: 68vh;
+   width: 35vw;
+   padding: 2vw;
+}
+#chat{
+   width: 37vw;
+}
+#chat > #inputchat{
+ width: 33vw;
+}
+.copy{
+   zoom:3;
+   font-family: SuperHero;
+   background-color: white;
+   
+}
+#icon{
+    
+    display: inline-block;
+}
+
+#icon > a{
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    /* background-color: black; */
+}
