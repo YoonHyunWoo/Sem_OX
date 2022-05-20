@@ -5,45 +5,75 @@
       <title>SemOX.io</title>
       <link rel="icon" href="https://iconarchive.com/download/i103471/paomedia/small-n-flat/sign-check.ico" type="image/x-icon">
       <style>
-         #chat, #message{
-            border: 2px solid black;
+         #message{
+            border: 1px solid black;
          }
          #icon{
             border: 2px solid black;
             display: inline-block;
         }
-
+        #hidden{
+           display: flex;
+           flex-direction: column;
+           flex-wrap: wrap;
+           align-items: center;
+        }
         #icon > a{
             display: inline-block;
             text-decoration: none;
             color: white;
             background-color: black;
         }
+
+        .mymessage{
+           text-align: right;
+           color: gray;
+        }
+        
+        #message{
+           height: 68vh;
+           width: 35vw;
+           padding: 2vw;
+        }
+        #chat{
+           width: 37vw;
+        }
+        #chat > #inputchat{
+         width: 33vw;
+        }
+        
       </style>
-      <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>      
+      <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
    </head>
    <body>
       
-      <div id = "icon">
-         <a href="file:///C:/workspace/Sem_OX/StaticWeb/index.html">SemOX.io</a> 
-      </div> <br>
-      
-      
-      <div id = "message">
-
-      </div> <br>
-      
-
-      <div id = "chat">
-         <input type="textarea" id="inputchat" onkeyup="onKeyUp()">
-         <button onclick="send()">Send</button>
-      </div> <br>
-      
-      
-      <div class="copylink">
+      <center>
+         <div id = "icon">
+            <a href="file:///C:/workspace/Sem_OX/StaticWeb/index.html">SemOX.io</a> 
+         </div>
          
-         <center><button class="copy">링크를 복사해서 초대하세요!</button></center>
+      </center>
+      <br>
+         
+      <div id="hidden">
+         <div id = "message"></div> <br>
+         
+         <div id = "chat">
+            <input type="textarea" id="inputchat" onkeyup="onKeyUp()">
+            <button onclick="send()">Send</button>
+         </div> <br>
+      
+         
       </div>
+      <br>
+      <div id = "userCount">
+
+      </div>
+      <center><button id="startButton" onclick="Start()">Start</button></center>
+      <div class="copylink">
+         <center><button class="copy">링크를 복사해서 초대하세요!</button></center>
+      </div>   
+      
 
    </body>
    <script>
@@ -80,8 +110,8 @@
       document.getElementById('message').appendChild(chatBox)
       chatBox.innerHTML = msg
       socket.emit('message', msg)
-      document.getElementById('inputchat').value = ''
-    }
+      document.getElementById('inputchat').value = '' 
+       }
 
 
     
@@ -107,6 +137,11 @@
          chatBox.innerHTML = msg
       })
 
+      socket.on('userCount', (data)=>{
+         //유저 세기 
+         document.getElementById('userCount').innerHTML = data
+      })
+
       // 방 링크 복사하기
       document.querySelector(".copy").addEventListener("click", function(){
       var tempElem = document.createElement('textarea');
@@ -116,6 +151,12 @@
       document.execCommand("copy"); 
       document.body.removeChild(tempElem);
       });
+
+      function Start(){
+         socket.emit('start')
+      }
+
+       
       
  </script>   
 </html>
