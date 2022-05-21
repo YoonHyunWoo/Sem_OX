@@ -4,8 +4,84 @@
       <meta charset="UTF-8">
       <title>SemOX.io</title>
       <link rel="icon" href="https://iconarchive.com/download/i103471/paomedia/small-n-flat/sign-check.ico" type="image/x-icon">
-      <link rel="stylesheet" href="font.css">
+      <!-- <link rel="stylesheet" href="font.css"> -->
       <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+      <style>
+         @font-face {
+    font-family: "SuperHero";
+    src: url("../asset/Super\ Hero\ Docall.ttf");
+}
+html{
+    font-family: SuperHero;
+    background-image: url('../asset/wepik-2022421-18410.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+#message{
+    border: 1px solid black;
+    background-color: white;
+ }
+ #icon{
+    
+    zoom: 3;
+}
+#hidden{
+   display: flex;
+   flex-direction: column;
+   flex-wrap: wrap;
+   align-items: center;
+}
+#icon > a{  
+    display: inline-block;
+    text-decoration: none;
+    
+}
+
+.mymessage{
+   text-align: right;
+   color: gray;
+}
+
+#message{
+   height: 68vh;
+   width: 35vw;
+   padding: 2vw;
+}
+#chat{
+   width: 37vw;
+}
+#chat > #inputchat{
+ width: 33vw;
+}
+.copy{
+   zoom:3;
+   font-family: SuperHero;
+   border: 0px;
+   
+}
+#icon{
+      
+    display: inline-block;
+}
+
+#icon > a{
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    
+    /* background-color: black; */
+}
+.copy:hover{
+   cursor: pointer;
+   
+}
+.copy:active{
+   color:white;
+   
+
+}
+      </style>
    </head>
    <body>
 
@@ -36,7 +112,7 @@
       
       <div class="copylink">
          <center>
-            <button class="copy">Copy and invite the link! </button></center>
+            <button class="copy" title="Click to copy">Copy and invite the link! </button></center>
       </div>   
       
 
@@ -82,7 +158,7 @@
     
       if(queryString.name == undefined || queryString.name == null){
          // 닉네임 입력하는 이벤트
-         let name = prompt('닉네임을 입력해주세요')
+         let name = prompt('Enter Your NickName')
          location.href = "file:///C:/workspace/Sem_OX/StaticWeb/room.html?room=" + queryString.room + "&name=" + name
       }
 
@@ -116,10 +192,6 @@
       document.execCommand("copy"); 
       document.body.removeChild(tempElem);
       });
-
-      
-
-       
       
  </script>   
 </html>

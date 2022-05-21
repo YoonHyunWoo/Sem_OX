@@ -7,29 +7,81 @@
     <link rel="icon" href="https://iconarchive.com/download/i103471/paomedia/small-n-flat/sign-check.ico" type="image/x-icon">
     <title>SemOX.io</title>
     <style>
+        @font-face {
+        font-family: "SuperHero";
+        src: url("../asset/Super\ Hero\ Docall.ttf");
+        }
         #icon{
-            border: 2px solid black;
+            zoom: 1.4;
             display: inline-block;
         }
 
         #icon > a{
             display: inline-block;
             text-decoration: none;
-            color: white;
-            background-color: black;
+            color: black;
+            padding: 3px;
+            font-family: SuperHero;   
+            
+            
+        }
+        button{
+            font-family: SuperHero;
+            border: 0px;
+            border: 0.7px solid rgb(66,71,14);
+            background-color: white;
+        }
+        button:hover{
+          cursor: pointer;
+          color: gray;
+        }
+        #zoom{
+            zoom: 6;
+        }
+        body{
+            font-family: SuperHero;
+            background-image: url('../asset/wepik-2022421-18410.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            padding: 20px;
+        }
+        #comment{
+            zoom: 0.5;
+        }
+        footer{
+            zoom:0.25;
+            padding-top: 21%;
+            margin-right: auto;
+            margin-left: auto;
+            letter-spacing : 300px
         }
     </style>
 </head>
 <center>
-    <div id = "icon">
-        <a href="file:///C:/workspace/Sem_OX/StaticWeb/index.html">SemOX.io</a>
-     </div>
+    <div id = "zoom">
+        
+        <div id = "icon">
+            <a href="file:///C:/workspace/Sem_OX/StaticWeb/index.html">SemOX.io</a>
+         </div>
+         <br><br><br><br> <br>
+        <button onclick="clickbutton()" class = 'room'>Create Room</button>
+        
+    
+    <div id = "comment">
+        
+    </div>
+    </div>
+    <footer>
+    <a href="https://github.com/YoonHyunWoo"><img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1629972215/noticon/vgvbhxae6jrvqpcnu0vb.png" alt=""></a>
+    <a href="https://awlhdla.tistory.com/"><img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1605925693/noticon/ydfszdnubsd0eczqffwf.png" alt=""></a>
 
-     <br>
-     <br>
+    </footer>
 
-    <button onclick="clickbutton()">방 만들기</button>
 </center>
+
+
+
 <body>
     
 </body>
