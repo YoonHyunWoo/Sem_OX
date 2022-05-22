@@ -18,7 +18,7 @@ io.on('connection', (socket) => {
 
     socket.on('name', (data)=>{
         socket.name = data
-        io.to(socket.room).emit('message',socket.name + " 님이 접속하셨습니다")
+        io.to(socket.room).emit('message',socket.name + " is joinned")
         if(rooms[socket.room] == undefined){
             rooms[socket.room] = socket.name + ' '
         }else{
@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('disconnecting',()=>{
-        io.to(socket.room).emit('message',socket.name + " 님이 퇴장하셨습니다")
+        io.to(socket.room).emit('message',socket.name + " is out")
         rooms[socket.room] = rooms[socket.room].replace(socket.name + ' ', '')
         io.to(socket.room).emit('userCount',rooms[socket.room])
         socket.leave(socket.room)
