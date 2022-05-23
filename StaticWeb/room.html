@@ -11,36 +11,62 @@
     font-family: "SuperHero";
     src: url("../asset/Super\ Hero\ Docall.ttf");
 }
+footer{
+            zoom:0.25;
+            padding-top: 100vh;
+            margin-right: auto;
+            margin-left: auto;
+            letter-spacing : 300px
+        }
 html{
     font-family: SuperHero;
     background-image: url('../asset/wepik-2022421-18410.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    margin-top:  3vw;
 }
 #message{
     border: 1px solid black;
-    background-color: white;
- }
- #icon{
+    overflow: auto;
+    background-color: rgba(255, 255, 255, 0.4);
     
-    zoom: 3;
+ }
+#start{
+   font-family: SuperHero;
+   font-size: 3vw;
+   background-color: rgba(255, 255, 255, 0);
+   color: blue;
+   border: 0px;
+}
+
+#start:hover{
+   color: darkblue;
+   cursor: pointer;
+}
+
+#start:active{
+   zoom: 0.8;
+}
+ 
+.message, .mymessage{
+   font-size: large;
 }
 #hidden{
-   display: flex;
+   display: none;
    flex-direction: column;
-   flex-wrap: wrap;
+   /* flex-wrap: wrap; */
    align-items: center;
 }
 #icon > a{  
     display: inline-block;
     text-decoration: none;
-    
+   font-size: 4.5vw;   
 }
 
 .mymessage{
    text-align: right;
-   color: gray;
+   /* color: gray; */
 }
 
 #message{
@@ -50,15 +76,30 @@ html{
 }
 #chat{
    width: 37vw;
+   height: 4vh;
+   
 }
 #chat > #inputchat{
- width: 33vw;
+ width: 30vw;
+ height: 4vh  ;
+ /* margin-bottom: 20px; */
 }
+#chat > button{
+   font-family: SuperHero;
+   font-size: xx-large;
+   border: 0px;
+   background-color: rgba(255, 255, 255, 0);
+   top: 300px;
+}
+#chat > button:hover{
+   cursor: pointer;
+}
+
 .copy{
    zoom:3;
    font-family: SuperHero;
    border: 0px;
-   
+   background-color: rgba(255, 255, 255, 0);
 }
 #icon{
       
@@ -74,12 +115,22 @@ html{
 }
 .copy:hover{
    cursor: pointer;
-   
+   color:blueviolet;
 }
 .copy:active{
-   color:white;
    
+   zoom: 2.5;
 
+}
+#userCount{
+   font-size: 3vw;
+}
+.copy{
+   font-size: 1vw;
+   color: purple;
+}
+#user{
+   overflow: auto;
 }
       </style>
    </head>
@@ -90,7 +141,7 @@ html{
             <a href="file:///C:/workspace/Sem_OX/StaticWeb/index.html">SemOX.io</a> 
          </div>
       </center>
-
+      
       <br>
       
       <div id="hidden">
@@ -104,18 +155,29 @@ html{
       
          
       </div>
-      <div id = "userCount">
+               
+      <center>
+         <div id = "users">
+            <p id="userCount"></p>
+         </div>      
+      </center>
 
-      </div>         
-      <br>
-      
-      
+      <center>
+            <button title="start" id = "start" onclick="Start()">Start Game!</button>
+      </center>
+      <br><br><br><br>
       <div class="copylink">
          <center>
-            <button class="copy" title="Click to copy">Copy and invite the link! </button></center>
+            <button id = "querycopy" class="copy" title="Click to copy">Copy and invite the link! </button></center>
       </div>   
+      <center>
+         <footer>
+            <a href="https://github.com/YoonHyunWoo"><img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1629972215/noticon/vgvbhxae6jrvqpcnu0vb.png" alt=""></a>
+            <a href="https://awlhdla.tistory.com/"><img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1605925693/noticon/ydfszdnubsd0eczqffwf.png" alt=""></a>
+        
+            </footer>
+      </center>
       
-
    </body>
    <script>
     function getQueryStringObject() {
@@ -158,7 +220,7 @@ html{
     
       if(queryString.name == undefined || queryString.name == null){
          // 닉네임 입력하는 이벤트
-         let name = prompt('Enter Your NickName')
+         let name = prompt('Enter Your Nickname')
          location.href = "file:///C:/workspace/Sem_OX/StaticWeb/room.html?room=" + queryString.room + "&name=" + name
       }
 
@@ -180,7 +242,7 @@ html{
 
       socket.on('userCount', (data)=>{
          //유저 세기 
-         document.getElementById('userCount').innerHTML = data
+         document.getElementById('userCount').innerHTML = 'Joinned users: ' +  data
       })
 
       // 방 링크 복사하기
@@ -191,8 +253,23 @@ html{
       tempElem.select();
       document.execCommand("copy"); 
       document.body.removeChild(tempElem);
+      
+      document.querySelector(".copy").innerHTML = 'copied!'
+      setTimeout(()=>{
+         document.querySelector(".copy").innerHTML = 'copy and invite the link!'
+      },2000)
       });
       
+      function Start(){
+         socket.emit('start')
+      }
+
+      socket.on('start', ()=>{
+         document.getElementById('hidden').style.display = 'flex'
+         document.getElementById('start').style.display = 'none'
+         
+         document.getElementsByTagName('footer')[0].style.display = 'none'
+      })
  </script>   
 </html>
 

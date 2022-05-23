@@ -20,9 +20,9 @@ io.on('connection', (socket) => {
         socket.name = data
         io.to(socket.room).emit('message',socket.name + " is joinned")
         if(rooms[socket.room] == undefined){
-            rooms[socket.room] = socket.name + ' '
+            rooms[socket.room] = socket.name + ', '
         }else{
-            rooms[socket.room] += socket.name + ' '
+            rooms[socket.room] += socket.name + ', '
         }
         io.to(socket.room).emit('userCount',rooms[socket.room])
         
@@ -33,9 +33,15 @@ io.on('connection', (socket) => {
         socket.broadcast.to(socket.room).emit('message',socket.name + ' : ' + data)
     })
 
+    socket.on('start',()=>{
+        socket.room
+        io.to(socket.room).emit('start')
+        io.to(socket.room).emit('message', "Started Game")
+    })
+
     socket.on('disconnecting',()=>{
         io.to(socket.room).emit('message',socket.name + " is out")
-        rooms[socket.room] = rooms[socket.room].replace(socket.name + ' ', '')
+        rooms[socket.room] = rooms[socket.room].replace(socket.name + ', ', '')
         io.to(socket.room).emit('userCount',rooms[socket.room])
         socket.leave(socket.room)
     })
