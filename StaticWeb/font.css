@@ -4,6 +4,7 @@
 }
 html{
     font-family: SuperHero;
+
 }
 #message{
     border: 1px solid black;
@@ -26,7 +27,7 @@ html{
 
 .mymessage{
    text-align: right;
-   color: gray;
+   /* color: black; */
 }
 
 #message{
