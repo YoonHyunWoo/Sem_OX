@@ -14,12 +14,21 @@ Node version은 **16.13.0**을 사용하고 있으며, `Dockerfile` 이미지 �
 {
 {
   "compilerOptions": {
+<<<<<<< HEAD
     "target": "es5",
     "module": "commonjs",
     "strict": true,      
     "noImplicitAny": false,
     "esModuleInterop": true,  
     "skipLibCheck": true,    
+=======
+    "target": "es5",                          
+    "module": "commonjs",                     
+    "strict": true,                           
+    "noImplicitAny": false,                 
+    "esModuleInterop": true,                
+    "skipLibCheck": true,                   
+>>>>>>> 8647a881b6d937e21aa45d62e6947d1cb756976a
     "forceConsistentCasingInFileNames": true
   }
 }
