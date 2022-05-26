@@ -7,6 +7,7 @@ app.use(cors());
 
 let rooms = {};
 let gamestatus = {};
+let gm = {};
 io.on("connection", (socket) => {
   socket.on("room", (data) => {
     socket.join(data);
@@ -19,6 +20,7 @@ io.on("connection", (socket) => {
     io.to(socket.room).emit("message", socket.name + " is joinned");
     if (rooms[socket.room] == undefined) {
       rooms[socket.room] = socket.name + ", ";
+      gm[socket.room] = socket.name
     } else {
       rooms[socket.room] += socket.name + ", ";
     }
