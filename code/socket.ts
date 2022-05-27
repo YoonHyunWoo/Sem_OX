@@ -30,6 +30,10 @@ io.on("connection", (socket) => {
     }
   });
 
+  // let arr = [1, 2, 3, 4, 5]
+  // 옵셔널 체이닝 도입하기
+  // console.log(arr?.[5])
+
   socket.on("message", (data) => {
     socket.broadcast
       .to(socket.room)
